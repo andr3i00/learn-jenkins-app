@@ -50,7 +50,7 @@ pipeline {
                 echo 'Test E2E'
                 sh '''
                 npm install serve
-                node_modules/.bin/serve -s build
+                node_modules/.bin/serve -s build &
                 npx plywright test
                 '''
             }
