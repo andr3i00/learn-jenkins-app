@@ -87,7 +87,7 @@ environment{
                 npm install netlify-cli
                 node_modules/.bin/netlify --version
                 echo "deployin to production site id: $NETLIFY_SITE_ID"
-                netlify status
+                node_modules/.bin/netlify status
                 '''
             }
         }
