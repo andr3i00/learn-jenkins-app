@@ -94,6 +94,15 @@ environment{
             }
         }
 
+         stage('Approval') {
+            steps {
+                timeout(1) {
+                    input message: 'Ready to deploy?', ok: 'Yes, I am sure to deploy'
+                }
+                
+            }
+        }
+
         stage ('Deploy Prod') {
             agent {
                 docker {
