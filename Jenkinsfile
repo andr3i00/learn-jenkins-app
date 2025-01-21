@@ -23,7 +23,6 @@ pipeline {
         }
 
         stage ('Test') {
-            echo 'Test stage'
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -31,6 +30,7 @@ pipeline {
                 }
             }
             steps{
+                echo 'Test stage'
                 sh '''
                 test -f build/index.html
                 npm test
