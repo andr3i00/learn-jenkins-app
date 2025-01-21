@@ -93,5 +93,28 @@ environment{
                 '''
             }
         }
+
+        stage ('Prod E2E') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    reuseNode true
+                }
+            }
+            environment{
+                     CI_ENVIRONMENT_URL = 'https://cheery-zuccutto-854c34.netlify.app'
+            }
+            steps{
+                echo 'Test E2E'
+                sh '''
+                npx playwright test --reporter=html
+                '''
+            }
+            post {
+            always {
+                publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright E2E Report', reportTitles: '', useWrapperFileDirectly: true])
+            }
+        }
+            }
     }
 }
